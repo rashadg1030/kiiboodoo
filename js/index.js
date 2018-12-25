@@ -1,12 +1,14 @@
+m = require("mithril");
+Textarea = require("../components/Textarea");
+
 var root = document.body;
 
-var Hello = {
+var Main = {
     view: function() {
-        return m("main", [
-            m("h1", {class: "title"}, "My first app"),
-            m("button", "A button"),
-        ])
+        return m("main", [ m("h1", {class: "title"}, "Kiiboodoo"), m(Textarea) ])
     }
 }
 
-m.mount(root, Hello);
+
+
+m.mount(root, Main);

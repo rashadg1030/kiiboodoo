@@ -6,9 +6,13 @@
   "dependencies": {
     "mithril": "^1.1.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack js/index.js --output bin/app.js -d --watch"
   },
   "repository": {
     "type": "git",
