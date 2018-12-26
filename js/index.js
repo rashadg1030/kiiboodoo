@@ -1,14 +1,15 @@
-m = require("mithril");
-Textarea = require("../components/Textarea");
+m = require("mithril")
+Textarea = require("../components/Textarea")
+Paragraph = require("../components/Paragraph")
 
-var root = document.body;
+var root = document.body
 
-var Main = {
+var App = {
     view: function() {
-        return m("main", [ m("h1", {class: "title"}, "Kiiboodoo"), m(Textarea) ])
+        return m("main", [ m("h1", {class: "title"}, "Kiiboodoo"), m(Textarea), m(Paragraph) ])
     }
 }
 
 
 
-m.mount(root, Main);
+m.mount(root, App)

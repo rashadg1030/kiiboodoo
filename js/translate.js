@@ -1,4 +1,5 @@
 module.exports = function translate(romaji) {
+    romaji = romaji.replace(/xtu/g, "っ")
     romaji = romaji.replace(/ô/g, "oう");
     romaji = romaji.replace(/û/g, "uう");
     romaji = romaji.replace(/â/g, "aあ");
