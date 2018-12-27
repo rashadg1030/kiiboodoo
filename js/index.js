@@ -1,6 +1,7 @@
 m = require("mithril")
 Textarea = require("../components/Textarea")
 Paragraph = require("../components/Paragraph")
+State = require("../components/State")
 
 var root = document.body
 

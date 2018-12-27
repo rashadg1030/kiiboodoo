@@ -3,6 +3,6 @@ State = require("./State")
 
 module.exports = {
     view: function() {
-        return m("p", State.text)
+        return m("p", State.hiragana)
     }
 }
