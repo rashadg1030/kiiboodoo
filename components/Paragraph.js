@@ -1,8 +1,9 @@
 m = require("mithril")
-State = require("./State")
 
-module.exports = {
-    view: function() {
-        return m("p", State.hiragana)
+module.exports = function(initalVNode) {
+    return {
+        view: function(vnode) {
+            return m("p", vnode.attrs.text)
+        }
     }
 }

@@ -1,10 +1,26 @@
 m = require("mithril")
 translate = require("../js/translate")
-State = require("./State")
+s = require("./State")
+Paragraph = require("./Paragraph")
+List = require("./List")
 
-module.exports = {
-    view: function(vnode) {
-        return m("textarea", { placeholder: "Type here", onkeyup: function() { vnode.dom.value = translate(vnode.dom.value); State.hiragana = vnode.dom.value; State.getKanji(vnode.dom.value) } })
+module.exports = function(initialVNode) {
+
+    var text = ""
+
+    function doSomething(e) {
+       e.target.value = text = translate(e.target.value);
+       s.dispatch("fetchKanji", [text])
+    }
+    
+    return {   
+        view: function(vnode) {
+            return m("div", [
+                m("textarea", { placeholder: "Type here", onkeyup: doSomething }),
+                m(Paragraph, { text }),
+                m(List, { text })
+            ]) 
+        }
     }
 }
 
