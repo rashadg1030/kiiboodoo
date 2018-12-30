@@ -5,6 +5,7 @@ module.exports = {
     selected: 0,
     strokeCount: 0,
     listCount: 0,
+    list: [],
     fetchKanji: function(kun) {
         var count = 0
         if(localStorage.getItem(kun) === null && kun !== "") {
@@ -16,13 +17,16 @@ module.exports = {
                 }
             })
             .then(function(res) {
-                var kanji = res.map(detail => ({ id: count++, character: detail.kanji.character, stroke: detail.kanji.stroke }))
+                var kanji = [{ id: count++, character: kun, stroke: 0 }]
+                kanji = kanji.concat(res.map(detail => ({ id: count++, character: detail.kanji.character, stroke: detail.kanji.stroke })))
                 localStorage.setItem(kun, JSON.stringify(kanji))
             })
         }
 
-        this.listCount = JSON.parse(localStorage.getItem(kun) || "[]").length
-        return JSON.parse(localStorage.getItem(kun) || "[]")
+        this.list = JSON.parse(localStorage.getItem(kun) || "[]")
+        this.listCount = this.list.length
+
+        return this.list
     },
     incStrokeCount: function(count) {
         this.strokeCount = this.strokeCount + count

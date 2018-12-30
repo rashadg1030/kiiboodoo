@@ -26,11 +26,12 @@ module.exports = function(initialVNode) {
     }
 
     function replace(e) {
-
         if (e.keyCode === 40 && s.selected < (s.listCount - 1))
             s.selected++
         else if (e.keyCode === 38 && s.selected > 0)
             s.selected--
+        else if (e.keyCode === 13)
+            flushBuffer()
         else
             s.selected = 0
     }
