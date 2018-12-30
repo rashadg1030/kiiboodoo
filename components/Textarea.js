@@ -30,9 +30,15 @@ module.exports = function(initialVNode) {
             s.selected++
         else if (e.keyCode === 38 && s.selected > 0)
             s.selected--
-        else if (e.keyCode === 13)
+        else if (e.keyCode === 9) {
+            e.preventDefault()
+            var replacement = document.getElementsByClassName("selected")[0].children[0].textContent
+            console.log(replacement)
+            var current = e.target.value
+
+            e.target.value = current.replace(/^[A-Za-z]+$/, replacement)
             flushBuffer()
-        else
+        } else
             s.selected = 0
     }
     
