@@ -1,0 +1,9 @@
+li {
+    list-style-type: none;
+    border: 5px solid red;
+    margin: 10px 0
+}
+
+.selected {
+    background-color: cadetblue
+}

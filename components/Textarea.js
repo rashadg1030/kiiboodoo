@@ -1,5 +1,5 @@
 m = require("mithril")
-translate = require("../js/translate")
+t = require("../js/translate")
 s = require("./State")
 Paragraph = require("./Paragraph")
 List = require("./List")
@@ -7,18 +7,40 @@ List = require("./List")
 module.exports = function(initialVNode) {
 
     var text = ""
+    var buffer = ""
+    var bufferLoaded = false
 
-    function doSomething(e) {
-       e.target.value = text = translate(e.target.value);
-       s.dispatch("fetchKanji", [text])
+    function setBuffer(romaji) {
+        hiragana = t.translateH(romaji)
+        buffer = hiragana
+        bufferLoaded = true
+    }
+
+    function flushBuffer() {
+        buffer = ""
+        bufferLoaded = false
+    }
+
+    function toHiragana(e) {
+        setBuffer(e.target.value) 
+    }
+
+    function replace(e) {
+
+        if (e.keyCode === 40 && s.selected < (s.listCount - 1))
+            s.selected++
+        else if (e.keyCode === 38 && s.selected > 0)
+            s.selected--
+        else
+            s.selected = 0
     }
     
     return {   
         view: function(vnode) {
             return m("div", [
-                m("textarea", { placeholder: "Type here", onkeyup: doSomething }),
-                m(Paragraph, { text }),
-                m(List, { text })
+                m("textarea", { placeholder: "Type here", onkeyup: toHiragana, onkeydown: replace }),
+                m(Paragraph, { buffer }),
+                m(List, { buffer })
             ]) 
         }
     }

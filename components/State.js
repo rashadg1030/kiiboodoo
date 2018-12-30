@@ -2,11 +2,12 @@ m = require("mithril")
 stream = require("mithril/stream")
 
 module.exports = {
-    dispatch: function(action, args) {
-        this[action].apply(this, args || [])
-    },
+    selected: 0,
+    strokeCount: 0,
+    listCount: 0,
     fetchKanji: function(kun) {
-        if(localStorage.getItem(kun) === null) {
+        var count = 0
+        if(localStorage.getItem(kun) === null && kun !== "") {
             m.request({
                 method: "GET",
                 url: "https://kanjialive-api.p.mashape.com/api/public/search/advanced?kun=" + kun,
@@ -15,15 +16,19 @@ module.exports = {
                 }
             })
             .then(function(res) {
-                var kanji = res.map(detail => ({ character: detail.kanji.character, stroke: detail.kanji.stroke }))
+                var kanji = res.map(detail => ({ id: count++, character: detail.kanji.character, stroke: detail.kanji.stroke }))
                 localStorage.setItem(kun, JSON.stringify(kanji))
             })
-        } 
+        }
 
+        this.listCount = JSON.parse(localStorage.getItem(kun) || "[]").length
         return JSON.parse(localStorage.getItem(kun) || "[]")
     },
-    setKanji: function(kun, kanji) {
-        localStorage.setItem(kun, JSON.stringify(kanji))
-    },
-    strokeCount: 0
+    incStrokeCount: function(count) {
+        this.strokeCount = this.strokeCount + count
+    }
 }
+
+// setKanji: function(kun, kanji) {
+//     localStorage.setItem(kun, JSON.stringify(kanji))
+// },
