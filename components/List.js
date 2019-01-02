@@ -7,9 +7,9 @@ module.exports = function(initialVnode) {
     function transform(kanji) {
         // Might need refactoring
         if (kanji.id === s.selected)
-            listItem = m("div", { id: kanji.id, class: "has-background-primary column" }, [ m("h1", kanji.character), m("h1", kanji.stroke) ])
+            listItem = m("div", { id: kanji.id, class: "has-background-success column is-2" }, [ m("h1", kanji.character), m("h1", "Strokes: " + kanji.stroke) ])
         else 
-            listItem = m("div", { id: kanji.id, class: "column" }, [ m("h1", kanji.character), m("h1", kanji.stroke) ])
+            listItem = m("div", { id: kanji.id, class: "has-background-primary column is-2" }, [ m("h1", kanji.character), m("h1", "Strokes: " + kanji.stroke) ])
         
         return listItem
     }
