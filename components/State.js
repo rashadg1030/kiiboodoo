@@ -18,9 +18,9 @@ module.exports = {
                 }
             })
             .then(function(res) {
-                var kanji = [{ id: count++, character: t.translateH(kun), stroke: 0 }]
-                kanji = kanji.concat(res.map(detail => ({ id: count++, character: detail.kanji.character, stroke: detail.kanji.stroke })))
-                localStorage.setItem(kun, JSON.stringify(kanji))
+                var hiragana = [{ id: count, character: t.translateH(kun), stroke: 0 }]
+                var kanjis = hiragana.concat(res.map(detail => ({ id: count++, character: detail.kanji.character, stroke: detail.kanji.stroke })))
+                localStorage.setItem(kun, JSON.stringify(kanjis))
             })
         }
 
@@ -29,8 +29,19 @@ module.exports = {
 
         return this.list
     },
+    nextKanji: function() {
+        if (this.selected < (this.listCount - 1))
+            this.selected++
+    },
+    prevKanji: function() {
+        if (this.selected > 0)
+            this.selected--
+    },
     incStrokeCount: function(count) {
         this.strokeCount = this.strokeCount + count
+    },
+    setSelected: function(num) {
+        this.selected = num
     }
 }
 
