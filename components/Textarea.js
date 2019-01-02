@@ -17,7 +17,7 @@ module.exports = function(initialVNode) {
         buffer = ""
     }
 
-    function doThing(e) {
+    function doThis(e) {
         if (e.keyCode === 9) {
             var current = e.target.value.trim()
             var replacement = document.getElementsByClassName("selected")[0].children[0].textContent
@@ -30,18 +30,18 @@ module.exports = function(initialVNode) {
     function doThat(e) {
         if (e.keyCode === 9) 
             e.preventDefault()
-        else if (e.keyCode === 40)
+        else if (e.keyCode === 40) {
             s.nextKanji()
-        else if (e.keyCode === 38) 
+        } else if (e.keyCode === 38) {
             s.prevKanji()
-        else 
+        } else 
             s.setSelected(0)
     }
     
     return {   
         view: function(vnode) {
             return m("div", [
-                m("textarea", { placeholder: "Type here", onkeyup: doThing, onkeydown: doThat }),
+                m("textarea", { placeholder: "Type here", onkeyup: doThis, onkeydown: doThat }),
                 m(Paragraph, { buffer }),
                 m(List, { buffer })
             ]) 
