@@ -19,7 +19,7 @@ module.exports = {
             })
             .then(function(res) {
                 var hiragana = [{ id: count, character: t.translateH(kun), stroke: 0 }]
-                var kanjis = hiragana.concat(res.map(detail => ({ id: count++, character: detail.kanji.character, stroke: detail.kanji.stroke })))
+                var kanjis = hiragana.concat(res.map(detail => ({ id: ++count, character: detail.kanji.character, stroke: detail.kanji.stroke })))
                 localStorage.setItem(kun, JSON.stringify(kanjis))
             })
         }
