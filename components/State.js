@@ -1,5 +1,6 @@
 m = require("mithril")
 stream = require("mithril/stream")
+t = require("../js/translate")
 
 module.exports = {
     selected: 0,
@@ -17,7 +18,7 @@ module.exports = {
                 }
             })
             .then(function(res) {
-                var kanji = [{ id: count++, character: kun, stroke: 0 }]
+                var kanji = [{ id: count++, character: t.translateH(kun), stroke: 0 }]
                 kanji = kanji.concat(res.map(detail => ({ id: count++, character: detail.kanji.character, stroke: detail.kanji.stroke })))
                 localStorage.setItem(kun, JSON.stringify(kanji))
             })
