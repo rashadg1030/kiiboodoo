@@ -20,7 +20,7 @@ module.exports = function(initialVNode) {
     function doThis(e) {
         if (e.keyCode === 9) {
             var current = e.target.value.trim()
-            var replacement = document.getElementsByClassName("selected")[0].children[0].textContent
+            var replacement = document.getElementsByClassName("has-background-primary column")[0].children[0].textContent
             e.target.value = current.replace(buffer, replacement)
             flushBuffer()
         } else
@@ -40,9 +40,11 @@ module.exports = function(initialVNode) {
     
     return {   
         view: function(vnode) {
-            return m("div", [
+            return m("div", { class: "container is-fluid" }, [
                 m("textarea", { placeholder: "Type here", onkeyup: doThis, onkeydown: doThat }),
+                m("br"),
                 m(Paragraph, { buffer }),
+                m("br"),
                 m(List, { buffer })
             ]) 
         }

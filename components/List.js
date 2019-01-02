@@ -7,9 +7,9 @@ module.exports = function(initialVnode) {
     function transform(kanji) {
         // Might need refactoring
         if (kanji.id === s.selected)
-            listItem = m("li", { id: kanji.id, class: "selected" }, [ m("h1", kanji.character), m("h1", kanji.stroke) ])
+            listItem = m("div", { id: kanji.id, class: "has-background-primary column" }, [ m("h1", kanji.character), m("h1", kanji.stroke) ])
         else 
-            listItem = m("li", { id: kanji.id, class: "listItem" }, [ m("h1", kanji.character), m("h1", kanji.stroke) ])
+            listItem = m("div", { id: kanji.id, class: "column" }, [ m("h1", kanji.character), m("h1", kanji.stroke) ])
         
         return listItem
     }
@@ -17,7 +17,7 @@ module.exports = function(initialVnode) {
 
     return {
         view: function(vnode) {
-            return m("ul", s.fetchKanji(vnode.attrs.buffer).map(transform))
+            return m("div", {class: "columns is-multiline"}, s.fetchKanji(vnode.attrs.buffer).map(transform))
         }
     }
 }
